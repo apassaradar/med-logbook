@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 .home,
@@ -44,14 +44,15 @@
 }
 
 .info-detail {
-  color:rgb(133, 136, 134);
+  color: rgb(133, 136, 134);
   font-size: 2rem;
   margin-bottom: 10px;
+  
 }
 
 .form-label {
   margin-top: 20px;
-  font-size: 1.5rem;;
+  font-size: 1.5rem;
 }
 
 .form-control {
@@ -70,7 +71,6 @@
   color: #fff;
   font-size: 2rem;
   margin-left: -60%;
-  
 }
 
 .form-input-btn:hover {
@@ -79,48 +79,40 @@
   transition: all 0.4s ease-out;
 }
 
+.card {
+  width: 24rem;
+  height: 22rem;
+  margin-bottom: 2rem;
+  border-color: rgb(80, 78, 78);
+  border-radius: 0.5rem;
+}
+
+.card:hover {
+  box-shadow: 5px 5px 10px 2px rgb(223, 223, 223) !important;
+}
+
 .card-body {
-    font-family: Oxygen, sans-serif;
-    margin: 2rem;
-}
-
-.card-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(12rem, 16rem));
-    gap: 2rem;
-    justify-content: center;
-}
-
-.card-container {
-    overflow: hidden;
-    box-shadow: 2 20px red;
-    border-radius: 0.2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-    transition: transform 200ms ease-in;
+  padding: 3rem 0 !important;
+  align-items: center;
 }
 
 .card-title {
-    height: 12rem;
-    width: 100%;
-    object-fit: cover;
+  font-size: 2rem;
+  padding: 0.5rem 2rem;
 }
 
-
-.card-description {
-    padding: 0 1rem;
-} 
+.card-text {
+  font-size: 1.5rem;
+  padding: 0.5rem 0.5rem;
+}
 
 .card-btn {
-    padding: 1rem;
-    font-family: inherit;
-    font-weight: bold;
-    font-size: 1rem;
-    margin: 1rem;
-    border: 2px solid red;
-    background: transparent;
-    color: red;
-    border-radius: 0.2rem;
+  justify-content: left;
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  position: absolute;
+  border-radius: 0.5rem;
+  
+  bottom: 2.5rem;
+  
 }

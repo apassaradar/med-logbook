@@ -7,17 +7,19 @@ import { SidebarData } from './SidebarData';
 import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
 
+
 const Nav = styled.div`
   background: #15171c;
   height: 80px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  
 `;
 
 const NavLogo = styled(Link)`
   color: #fff;
-  coursor: pointer;
+  cursor: pointer;
   text-decoration: none;  
   margin-left: 2rem;
   font-size: 2rem;
@@ -53,7 +55,7 @@ const SidebarWrap = styled.div`
 `;
 const Logout = styled(Link)`
   color: #fff;
-  coursor: pointer;
+  cursor: pointer;
   text-decoration: none;  
   margin-left: 80%;
   font-size: 4rem;
@@ -70,7 +72,7 @@ const Sidebar = () => {
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
-        <Nav>
+        <Nav sticky='top'>
           <NavIcon to='#'>
             <FaIcons.FaBars onClick={showSidebar} />
           </NavIcon>
