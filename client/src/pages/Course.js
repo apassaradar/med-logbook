@@ -1,8 +1,7 @@
 import React from "react";
 import Card from "../components/Card";
 import styled from "styled-components";
-import { MdEventSeat } from 'react-icons/md';
-
+import { MdEventSeat } from "react-icons/md";
 
 const PageTitle = styled.div`
   font-size: 5rem;
@@ -35,50 +34,95 @@ export const Course = () => {
       <CardContainer>
         <CardRow>
           <div className="col-md-1">
-            <Card 
-            icon= {MdEventSeat}
-            title="รายชื่อผู้ป่วยในความดูแล" 
-            text="หน่วยละ 2 ราย" 
-            link='/courses/courses1'/>
+            <Card
+              icon={MdEventSeat}
+              title="รายชื่อผู้ป่วยในความดูแล"
+              text="หน่วยละ 2 ราย"
+              link="/courses/patients"
+            />
           </div>
           <div className="col-md-1">
-            <Card title="รายชื่อผู้ป่วยที่ได้เข้าสังเกตการผ่าตัดใหญ่" text="อย่างน้อยสัปดาห์ละ 1 ราย/หน่วย" link='/courses/courses5'/>
+            <Card
+              title="รายชื่อผู้ป่วยที่ได้เข้าสังเกตการผ่าตัดใหญ่"
+              text="อย่างน้อยสัปดาห์ละ 1 ราย/หน่วย"
+              link="/courses/observemajor"
+            />
           </div>
           <div className="col-md-1">
-            <Card title="รายชื่อผู้ป่วยที่ได้เย็บแผล" text="อย่างน้อย 3 ราย" link='/courses/courses9'/>
-          </div>
-        </CardRow>
-        <CardRow>
-          <div className="col-md-1">
-            <Card title="การเข้าเรียนที่ OPD" text="..." link='/courses/courses2'/>
-          </div>
-          <div className="col-md-1">
-            <Card title="รายชื่อผู้ป่วยที่ได้เข้าช่วยการผ่าตัดใหญ่" text="อย่างน้อย 2 ราย" link='/courses/courses6'/>
-          </div>
-          <div className="col-md-1">
-            <Card title="รายชื่อผู้ป่วยที่ได้เใส่ Foley Cath." text="อย่างน้อย 2 ราย" link='/courses/courses10'/>
+            <Card
+              title="รายชื่อผู้ป่วยที่ได้เย็บแผล"
+              text="อย่างน้อย 3 ราย"
+              link="/courses/stitches"
+            />
           </div>
         </CardRow>
         <CardRow>
           <div className="col-md-1">
-            <Card title="การเข้าร่วม Conference ของหน่วย" text="" link='/courses/courses3'/>
+            <Card
+              title="การเข้าเรียนที่ OPD"
+              text="..."
+              link="/courses/opd"
+            />
           </div>
           <div className="col-md-1">
-            <Card title="รายชื่อผู้ป่วยที่ได้เข้าสังเกตหรือช่วยการผ่าตัดเล็ก" text="อย่างน้อย 2 ราย" link='/courses/courses7'/>
+            <Card
+              title="รายชื่อผู้ป่วยที่ได้เข้าช่วยการผ่าตัดใหญ่"
+              text="อย่างน้อย 2 ราย"
+              link="/courses/helpmajor"
+            />
           </div>
           <div className="col-md-1">
-            <Card title="รายชื่อผู้ป่วยที่ได้ทำการวัด CVP" text="..." link='/courses/courses11'/>
+            <Card
+              title="รายชื่อผู้ป่วยที่ได้เใส่ Foley Cath."
+              text="อย่างน้อย 2 ราย"
+              link="/courses/foleycath"
+            />
           </div>
         </CardRow>
         <CardRow>
           <div className="col-md-1">
-            <Card title="การอยู่เวรห้องฉุกเฉิน" text="เวลา 19.00 - 22.00" link='/courses/courses4'/>
+            <Card
+              title="การเข้าร่วม Conference ของหน่วย"
+              text=""
+              link="/courses/conference"
+            />
           </div>
           <div className="col-md-1">
-            <Card title="รายชื่อผู้ป่วยที่ได้เห็น First aid in major trauma" text="อย่างน้อย 2 ราย" link='/courses/courses8'/>
+            <Card
+              title="รายชื่อผู้ป่วยที่ได้เข้าสังเกตหรือช่วยการผ่าตัดเล็ก"
+              text="อย่างน้อย 2 ราย"
+              link="/courses/helpobserveminor"
+            />
           </div>
           <div className="col-md-1">
-            <Card title="การสอนของ resident" text="..." link='/courses/courses12'/>
+            <Card
+              title="รายชื่อผู้ป่วยที่ได้ทำการวัด CVP"
+              text="..."
+              link="/courses/cvp"
+            />
+          </div>
+        </CardRow>
+        <CardRow>
+          <div className="col-md-1">
+            <Card
+              title="การอยู่เวรห้องฉุกเฉิน"
+              text="เวลา 19.00 - 22.00"
+              link="/courses/emergency"
+            />
+          </div>
+          <div className="col-md-1">
+            <Card
+              title="รายชื่อผู้ป่วยที่ได้เห็น First aid in major trauma"
+              text="อย่างน้อย 2 ราย"
+              link="/courses/firstaid"
+            />
+          </div>
+          <div className="col-md-1">
+            <Card
+              title="การสอนของ resident"
+              text="..."
+              link="/courses/resident"
+            />
           </div>
         </CardRow>
       </CardContainer>

@@ -37,31 +37,31 @@ export const SidebarData = [
     subNav: [
       {
         title: 'รายชื่อผู้ป่วยในความดูแล',
-        path: '/courses/courses1',
+        path: '/courses/patients',
         icon: <IoIcons.IoMdPersonAdd />,
         cName: 'sub-nav'
       },
       {
         title: 'การเข้าเรียนที่ OPD',
-        path: '/courses/courses2',
+        path: '/courses/opd',
         icon: <IoIcons.IoMdClipboard />,
         cName: 'sub-nav'
       },
       {
         title: 'การเข้าร่วม Conference',
-        path: '/courses/courses3',
+        path: '/courses/conference',
         icon: <MdIcons.MdEventSeat />,
         cName: 'sub-nav'
       },
       {
         title: 'การอยู่เวรห้องฉุกเฉิน',
-        path: '/courses/courses4',
+        path: '/courses/emergency',
         icon: <IoIcons.IoMdMedkit />,
         cName: 'sub-nav'
       },
       {
         title: 'การเข้าสังเกตการผ่าตัดใหญ่',
-        path: '/courses/courses5',
+        path: '/courses/observemajor',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },
