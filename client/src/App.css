@@ -116,3 +116,43 @@
   bottom: 2.5rem;
   
 }
+
+
+.data-card {
+  margin: 2rem 2rem 2rem 0;
+  padding-top: 1.5rem;
+  width: 500px;
+  box-shadow: 0 0 15px 4px rgb(187, 182, 182);
+  transition: transform 0.3s ease;
+}
+
+.data-card:hover {
+  transform: scale(1.01);
+}
+
+.data-card-body {
+  padding-left: 3rem;
+  padding-bottom: 3rem;;
+  
+}
+
+.data-card-text {
+  font-size: 1.5rem;
+  padding: 0.5rem 0.5rem;
+}
+
+.data-card-btn {
+  display: flex;
+  align-content: center;
+  justify-content: flex-end;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  background-color: rgb(212, 30, 30);
+  color:rgb(235, 238, 240);
+  outline-color: rgb(212, 30, 30);
+  margin-left: 300px;
+  margin-right: 30px;
+
+}

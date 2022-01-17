@@ -132,14 +132,15 @@ const Patients = () => {
                 </button>
                 {patientList.map((val, key) => {
                     return (
-                        <div className="data card">
-                            <div className="data-card-body text-left">
+                        <div className="data-card">
+                            <div className="data-card-body">
                                 <p className="data-card-text">HN. : {val.hn}</p>
                                 <p className="data-card-text">ชื่อผู้ป่วย : {val.patient_name}</p>
                                 <p className="data-card-text">Diagnosis : {val.diagnosis}</p>
                                 <p className="data-card-text">Ward : {val.ward}</p>
                                 <p className="data-card-text">Unit : {val.unit}</p>
-                                <button btn btn-danger onClick={() => {deleteData(val.id)}}>Delete</button>
+                                <button className="data-card-btn btn-danger" onClick={() => {deleteData(val.id)}}>Delete</button>
+                               
                             </div>
                         </div>
                     );
