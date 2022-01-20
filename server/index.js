@@ -6,152 +6,12 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
-
 const db = mysql.createConnection({
   user: "root",
   host: "localhost",
   password: "",
-   database: "medstudentlogbook",
+database: "medstudentlogbook", //ปิดไว้ตอนrun  npm run dev  ครั้งเเรก รันครั้งที่สองค่อยเปิด
 });
-// connect 
-db.connect((err) => {
-  if(err){
-  throw err;
-  }
-  console.log('MySql Connected ....');
-  
-  });
-  app.get('/courses/createDb', (req, res) => {
-    let sql = 'CREATE DATABASE medstudentlogbook';
-    db.query(sql, (err, result) => {
-        if(err) throw err;
-        console.log(result);
-        res.send('Database created...');
-    });
-  });
-
-  // create DB 
-app.get('/courses/createconferance', (req, res) => {
-  let sql = 'CREATE TABLE conferance(id int AUTO_INCREMENT, name_conferance VARCHAR(255),unit int , signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-  db.query(sql, (err, result) => {
-       if(err) throw err;
-       console.log(result);
-       res.send('Posts table created...');
-  });
-});
-
-app.get('/courses/createcvp', (req, res) => {
-  let sql = 'CREATE TABLE cvp(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,unit int,ward int,diagnosis VARCHAR(255),manager VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createemergency', (req, res) => {
-  let sql = 'CREATE TABLE emergency(id int AUTO_INCREMENT, number int,diagnosis VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createfirstaid', (req, res) => {
-  let sql = 'CREATE TABLE firstaid(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,diagnosis VARCHAR(255),procedures VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createfoleycath', (req, res) => {
-  let sql = 'CREATE TABLE foleycath(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,ward int,diagnosis VARCHAR(255),manager VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-
-app.get('/courses/createhelpmajor', (req, res) => {
-  let sql = 'CREATE TABLE helpmajor(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,diagnosis VARCHAR(255),procedures VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createhelpobserveminor', (req, res) => {
-  let sql = 'CREATE TABLE helpobserveminor(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,diagnosis VARCHAR(255),procedures VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createobservemajor', (req, res) => {
-  let sql = 'CREATE TABLE observemajor(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,diagnosis VARCHAR(255),procedures VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createopd', (req, res) => {
-  let sql = 'CREATE TABLE opd(id int AUTO_INCREMENT,week int,topic VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-app.get('/courses/createpatient', (req, res) => {
-  let sql = 'CREATE TABLE patient(id int AUTO_INCREMENT, week int, patient_name VARCHAR(255),hn int,diagnosis VARCHAR(255),ward int,unit int,datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createresident', (req, res) => {
-  let sql = 'CREATE TABLE resident(id int AUTO_INCREMENT,week int,topic VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createstitches', (req, res) => {
-  let sql = 'CREATE TABLE stitches(id int AUTO_INCREMENT, week int, patient_name VARCHAR(255),hn int,diagnosis VARCHAR(255),ward int,unit int,datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-
 
 // app.post("/users", (req, res) => {
 
@@ -170,12 +30,6 @@ db.query(sql, (err, result) => {
 //         }
 //     );
 // });
-
-///create table 
-
-
-
-
 app.get("/courses/patients", (req, res) => {
   db.query("SELECT * FROM patients", (err, result) => {
     if (err) {
@@ -258,6 +112,7 @@ app.delete("/courses/opd/:id", (req, res) => {
 })
 
 app.get('/courses/conference',(req, res) => {
+  
     db.query(
         "SELECT * FROM conference", (err, result) => {
             if (err) {
