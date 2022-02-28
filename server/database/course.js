@@ -8,7 +8,7 @@ const db = mysql.createConnection({
   });
 
 db.connect(() => {
-    let sql = 'CREATE TABLE stitches(courseID int AUTO_INCREMENT, unit int,  PRIMARY KEY(unitID))';
+    let sql = 'CREATE TABLE course(courseID int AUTO_INCREMENT, coursename VARCHAR(255),  PRIMARY KEY(courseID))';
  
  
 db.query(sql, (err, result) => {

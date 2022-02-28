@@ -8,7 +8,7 @@ const db = mysql.createConnection({
   });
 
 db.connect(() => {
-    let sql = 'CREATE TABLE foleycath(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,ward int,diagnosis VARCHAR(255),manager VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
+    let sql = 'CREATE TABLE firsaid(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,courseID int,userID int,wardID int,diagnosis VARCHAR(255),manager VARCHAR(255),signature VARCHAR(255),created_at DATETIME,update_at DATETIME, PRIMARY KEY(id), FOREIGN KEY (userID) REFERENCES users(userID), FOREIGN KEY (wardID) REFERENCES ward(wardID),FOREIGN KEY (courseID) REFERENCES course(courseID))';
  
  
 db.query(sql, (err, result) => {
