@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import Datetime from "../../components/Datetime";
 
 
 
@@ -10,7 +9,7 @@ const Emergency = () => {
 
     const [emergencyList, setEmergencyList] = useState([]);
 
-    const getDatas = () => {
+    const getData = () => {
         Axios.get("http://localhost:3001/courses/emergency").then((response) => {
             setEmergencyList(response.data);
         });
@@ -43,7 +42,6 @@ const Emergency = () => {
   
     return (
     <div className="container">
-        <Datetime className="datetime" />
         <h1 className='info-name'>การอยู่เวรห้องฉุกเฉิน 19.00 - 22.00</h1>
         <div className="information">
             <form action="">
@@ -64,16 +62,16 @@ const Emergency = () => {
             </form>
         </div>
         <hr />
-        <div className="datas">
-            <button class="btn btn-primary" onClick={getDatas}>
-                Show Datas
+        <div className="data">
+            <button class="btn btn-primary" onClick={getData}>
+                Show Data
             </button>
             {emergencyList.map((val, key) => {
                     return (
-                        <div className="data card">
+                        <div className="data-card">
                             <div className="data-card-body text-left">
                                 <p className="data-card-text">วินิจฉัย หรือประสบการณ์ที่ได้รับ : {val.experience}</p>
-                                <button btn btn-danger onClick={() => {deleteData(val.id)}}>Delete</button>
+                                <button className="data-card-btn btn-danger" onClick={() => {deleteData(val.id)}}>Delete</button>
                             </div>
                         </div>
                     );

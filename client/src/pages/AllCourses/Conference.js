@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import Datetime from "../../components/Datetime";
 
 
 
@@ -11,7 +10,7 @@ const Conference = () => {
 
     const [conferenceList, setConferenceList] = useState([]);
 
-    const getDatas = () => {
+    const getData = () => {
         Axios.get("http://localhost:3001/courses/conference").then((response) => {
             setConferenceList(response.data);
         });
@@ -44,7 +43,6 @@ const Conference = () => {
 
     return (
         <div className="container">
-            <Datetime className="mb-20" />
             <h1 className="info-name">การเข้าร่วม Conference ของหน่วย</h1>
             <div className="information">
                 <form action=""> 
@@ -78,17 +76,17 @@ const Conference = () => {
                 </form>
             </div>
             <hr />
-            <div className="datas">
-                <button class="btn btn-primary" onClick={getDatas}>
-                    Show Datas
+            <div className="data">
+                <button class="btn btn-primary" onClick={getData}>
+                    Show Data
                 </button>
                 {conferenceList.map((val, key) => {
                     return (
-                        <div className="data card">
+                        <div className="data-card">
                             <div className="data-card-body text-left">
                                 <p className="data-card-text">ชื่อ Conference : {val.conference_name}</p>
                                 <p className="data-card-text">Unit : {val.unit}</p>
-                                <button btn btn-danger onClick={() => {deleteData(val.id)}}>Delete</button>
+                                <button className="data-card-btn btn-danger" onClick={() => {deleteData(val.id)}}>Delete</button>
                             </div>
                         </div>
                     );

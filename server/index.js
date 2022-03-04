@@ -5,173 +5,45 @@ const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }));
 
 const db = mysql.createConnection({
   user: "root",
   host: "localhost",
   password: "",
-   database: "medstudentlogbook",
+   database: "med-student-logbook",
 });
-// connect 
-db.connect((err) => {
-  if(err){
-  throw err;
-  }
-  console.log('MySql Connected ....');
+
+
   
+app.post("/login", (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    console.log(username);
+  
+    db.query(
+      "SELECT * FROM users WHERE username = ?",
+      [username],
+      (err, result) => {
+        if (err) {
+          res.send({ err: err });
+          
+        }
+  
+        if (result.length > 0) {
+          if (password == result[0].password) {
+              res.send(result[0]);
+            } else {
+              res.send({ message: "Wrong username/password combination!" });
+            }
+
+        } else {
+          res.send({ message: "User doesn't exist" });
+        }
+      }
+    );
   });
-  app.get('/courses/createDb', (req, res) => {
-    let sql = 'CREATE DATABASE medstudentlogbook';
-    db.query(sql, (err, result) => {
-        if(err) throw err;
-        console.log(result);
-        res.send('Database created...');
-    });
-  });
-
-  // create DB 
-app.get('/courses/createconferance', (req, res) => {
-  let sql = 'CREATE TABLE conferance(id int AUTO_INCREMENT, name_conferance VARCHAR(255),unit int , signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-  db.query(sql, (err, result) => {
-       if(err) throw err;
-       console.log(result);
-       res.send('Posts table created...');
-  });
-});
-
-app.get('/courses/createcvp', (req, res) => {
-  let sql = 'CREATE TABLE cvp(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,unit int,ward int,diagnosis VARCHAR(255),manager VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createemergency', (req, res) => {
-  let sql = 'CREATE TABLE emergency(id int AUTO_INCREMENT, number int,diagnosis VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createfirstaid', (req, res) => {
-  let sql = 'CREATE TABLE firstaid(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,diagnosis VARCHAR(255),procedures VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createfoleycath', (req, res) => {
-  let sql = 'CREATE TABLE foleycath(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,ward int,diagnosis VARCHAR(255),manager VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-
-app.get('/courses/createhelpmajor', (req, res) => {
-  let sql = 'CREATE TABLE helpmajor(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,diagnosis VARCHAR(255),procedures VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createhelpobserveminor', (req, res) => {
-  let sql = 'CREATE TABLE helpobserveminor(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,diagnosis VARCHAR(255),procedures VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createobservemajor', (req, res) => {
-  let sql = 'CREATE TABLE observemajor(id int AUTO_INCREMENT,  patient_name VARCHAR(255),hn int,diagnosis VARCHAR(255),procedures VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createopd', (req, res) => {
-  let sql = 'CREATE TABLE opd(id int AUTO_INCREMENT,week int,topic VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-app.get('/courses/createpatient', (req, res) => {
-  let sql = 'CREATE TABLE patient(id int AUTO_INCREMENT, week int, patient_name VARCHAR(255),hn int,diagnosis VARCHAR(255),ward int,unit int,datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createresident', (req, res) => {
-  let sql = 'CREATE TABLE resident(id int AUTO_INCREMENT,week int,topic VARCHAR(255),signature VARCHAR(255),datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-app.get('/courses/createstitches', (req, res) => {
-  let sql = 'CREATE TABLE stitches(id int AUTO_INCREMENT, week int, patient_name VARCHAR(255),hn int,diagnosis VARCHAR(255),ward int,unit int,datetime DATETIME, PRIMARY KEY(id))';
- 
-db.query(sql, (err, result) => {
-     if(err) throw err;
-     console.log(result);
-     res.send('Posts table created...');
-});
-});
-
-
-
-// app.post("/users", (req, res) => {
-
-//     const username = req.body.username;
-//     const password = req.body.password;
-
-//     db.query(
-//         "INSERT INTO accounts (username, password) VALUES (?,?)",
-//         [username, password],
-//         (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
-
-///create table 
 
 
 
@@ -380,232 +252,319 @@ app.delete("/courses/observemajor/:id", (req, res) => {
           }
     });
 })
-// app.get('/courses/helpmajor',(req, res) => {
-//     db.query(
-//         "SELECT * FROM helpmajor", (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
 
-// app.post("/courses/helpmajor", (req, res) => {
+app.get('/courses/helpmajor',(req, res) => {
+    db.query(
+        "SELECT * FROM helpmajor", (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
 
-//     const hn = req.body.hn;
-//     const patient_name = req.body.patient_name;
-//     const diagnosis = req.body.diagnosis;
-//     const ward = req.body.ward;
-//     const unit = req.body.unit;
+app.post("/courses/helpmajor", (req, res) => {
 
-//     db.query(
-//         "INSERT INTO helpmajor (hn, patient_name, diagnosis, ward, unit) VALUES (?,?,?,?,?)",
-//         [hn, patient_name, diagnosis, ward, unit],
-//         (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+    const hn = req.body.hn;
+    const patient_name = req.body.patient_name;
+    const diagnosis = req.body.diagnosis;
+    const ward = req.body.ward;
+    const unit = req.body.unit;
 
-// app.get('/courses/helpobserveminor',(req, res) => {
-//     db.query(
-//         "SELECT * FROM helpobserveminor", (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+    db.query(
+        "INSERT INTO helpmajor (hn, patient_name, diagnosis, ward, unit) VALUES (?,?,?,?,?)",
+        [hn, patient_name, diagnosis, ward, unit],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
 
-// app.post("/courses/helpobserveminor", (req, res) => {
+app.delete("/courses/helpmajor/:id", (req, res) => {
+  const id = req.params.id;
 
-//     const hn = req.body.hn;
-//     const patient_name = req.body.patient_name;
-//     const diagnosis = req.body.diagnosis;
-//     const ward = req.body.ward;
-//     const unit = req.body.unit;
 
-//     db.query(
-//         "INSERT INTO helpobserveminor (hn, patient_name, diagnosis, ward, unit) VALUES (?,?,?,?,?)",
-//         [hn, patient_name, diagnosis, ward, unit],
-//         (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+  db.query("DELETE FROM helpmajor WHERE id = ?", id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
-// app.get('/courses/firstaid',(req, res) => {
-//     db.query(
-//         "SELECT * FROM firstaid", (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+app.get('/courses/helpobserveminor',(req, res) => {
+    db.query(
+        "SELECT * FROM helpobserveminor", (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
 
-// app.post("/courses/firstaid", (req, res) => {
+app.post("/courses/helpobserveminor", (req, res) => {
 
-//     const hn = req.body.hn;
-//     const patient_name = req.body.patient_name;
-//     const diagnosis = req.body.diagnosis;
-//     const ward = req.body.ward;
-//     const unit = req.body.unit;
+    const hn = req.body.hn;
+    const patient_name = req.body.patient_name;
+    const diagnosis = req.body.diagnosis;
+    const ward = req.body.ward;
+    const unit = req.body.unit;
 
-//     db.query(
-//         "INSERT INTO firstaid (hn, patient_name, diagnosis, ward, unit) VALUES (?,?,?,?,?)",
-//         [hn, patient_name, diagnosis, ward, unit],
-//         (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+    db.query(
+        "INSERT INTO helpobserveminor (hn, patient_name, diagnosis, ward, unit) VALUES (?,?,?,?,?)",
+        [hn, patient_name, diagnosis, ward, unit],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
 
-// app.get('/courses/stitches',(req, res) => {
-//     db.query(
-//         "SELECT * FROM stitches", (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+app.delete("/courses/helpobserveminor/:id", (req, res) => {
+  const id = req.params.id;
 
-// app.post("/courses/stitches", (req, res) => {
+  db.query("DELETE FROM helpobserveminor WHERE id = ?", id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
-//     const hn = req.body.hn;
-//     const patient_name = req.body.patient_name;
-//     const diagnosis = req.body.diagnosis;
-//     const ward = req.body.ward;
-//     const unit = req.body.unit;
+app.get('/courses/firstaid',(req, res) => {
+    db.query(
+        "SELECT * FROM firstaid", (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
 
-//     db.query(
-//         "INSERT INTO stitches (hn, patient_name, diagnosis, ward, unit) VALUES (?,?,?,?,?)",
-//         [hn, patient_name, diagnosis, ward, unit],
-//         (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+app.post("/courses/firstaid", (req, res) => {
 
-// app.get('/courses/foleycath',(req, res) => {
-//     db.query(
-//         "SELECT * FROM foleycath", (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+    const hn = req.body.hn;
+    const patient_name = req.body.patient_name;
+    const diagnosis = req.body.diagnosis;
+    const ward = req.body.ward;
+    const unit = req.body.unit;
 
-// app.post("/courses/foleycath", (req, res) => {
+    db.query(
+        "INSERT INTO firstaid (hn, patient_name, diagnosis, ward, unit) VALUES (?,?,?,?,?)",
+        [hn, patient_name, diagnosis, ward, unit],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
 
-//     const hn = req.body.hn;
-//     const patient_name = req.body.patient_name;
-//     const diagnosis = req.body.diagnosis;
-//     const ward = req.body.ward;
-//     const unit = req.body.unit;
+app.delete("/courses/firstaid/:id", (req, res) => {
+  const id = req.params.id;
 
-//     db.query(
-//         "INSERT INTO foleycath (hn, patient_name, diagnosis, ward, unit) VALUES (?,?,?,?,?)",
-//         [hn, patient_name, diagnosis, ward, unit],
-//         (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+  db.query("DELETE FROM firstaid WHERE id = ?", id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
-// app.get('/courses/cvp',(req, res) => {
-//     db.query(
-//         "SELECT * FROM cvp", (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+app.get('/courses/stitches',(req, res) => {
+    db.query(
+        "SELECT * FROM stitches", (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
 
-// app.post("/courses/cvp", (req, res) => {
+app.post("/courses/stitches", (req, res) => {
 
-//     const hn = req.body.hn;
-//     const patient_name = req.body.patient_name;
-//     const diagnosis = req.body.diagnosis;
-//     const ward = req.body.ward;
-//     const unit = req.body.unit;
+    const hn = req.body.hn;
+    const patient_name = req.body.patient_name;
+    const diagnosis = req.body.diagnosis;
+    const ward = req.body.ward;
+    const unit = req.body.unit;
 
-//     db.query(
-//         "INSERT INTO cvp (hn, patient_name, diagnosis, ward, unit) VALUES (?,?,?,?,?)",
-//         [hn, patient_name, diagnosis, ward, unit],
-//         (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+    db.query(
+        "INSERT INTO stitches (hn, patient_name, diagnosis, ward, unit) VALUES (?,?,?,?,?)",
+        [hn, patient_name, diagnosis, ward, unit],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
 
-// app.get('/courses/resident',(req, res) => {
-//     db.query(
-//         "SELECT * FROM resident", (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+app.delete("/courses/stitches/:id", (req, res) => {
+  const id = req.params.id;
 
-// app.post("/courses/resident", (req, res) => {
+  db.query("DELETE FROM stitches WHERE id = ?", id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
-//     const resident = req.body.resident;
+app.get('/courses/foleycath',(req, res) => {
+    db.query(
+        "SELECT * FROM foleycath", (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
 
-//     db.query(
-//         "INSERT INTO resident (resident VALUES (?)",
-//         [resident],
-//         (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 res.send("Values Inserted");
-//             }
-//         }
-//     );
-// });
+app.post("/courses/foleycath", (req, res) => {
+
+    const hn = req.body.hn;
+    const patient_name = req.body.patient_name;
+    const diagnosis = req.body.diagnosis;
+    const ward = req.body.ward;
+    const unit = req.body.unit;
+
+    db.query(
+        "INSERT INTO foleycath (hn, patient_name, diagnosis, ward, unit) VALUES (?,?,?,?,?)",
+        [hn, patient_name, diagnosis, ward, unit],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
+
+app.delete("/courses/foleycath/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.query("DELETE FROM foleycath WHERE id = ?", id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.get('/courses/cvp',(req, res) => {
+    db.query(
+        "SELECT * FROM cvp", (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
+
+app.post("/courses/cvp", (req, res) => {
+
+    const hn = req.body.hn;
+    const patient_name = req.body.patient_name;
+    const diagnosis = req.body.diagnosis;
+    const ward = req.body.ward;
+    const unit = req.body.unit;
+
+    db.query(
+        "INSERT INTO cvp (hn, patient_name, diagnosis, ward, unit) VALUES (?,?,?,?,?)",
+        [hn, patient_name, diagnosis, ward, unit],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
+
+
+app.delete("/courses/cvp/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.query("DELETE FROM cvp WHERE id = ?", id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.get('/courses/resident',(req, res) => {
+    db.query(
+        "SELECT * FROM resident", (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
+
+app.post("/courses/resident", (req, res) => {
+
+    const resident = req.body.resident;
+
+    db.query(
+        "INSERT INTO resident (resident VALUES (?)",
+        [resident],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
+
+app.delete("/courses/resident/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.query("DELETE FROM resident WHERE id = ?", id, (err, result) => {
+      if (err) {
+          console.log(err);
+        } else {
+          res.send(result);
+        }
+  });
+})
 
 app.listen("3001", () => {
   console.log("Server is running on port 3001");

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import Datetime from "../../components/Datetime";
+
 
 const HelpMajor = () => {
   const [hn, setHn] = useState("");
@@ -11,7 +11,7 @@ const HelpMajor = () => {
 
   const [helpmajorList, setHelpMajorList] = useState([]);
 
-  const getDatas = () => {
+  const getData = () => {
     Axios.get("http://localhost:3001/courses/helpmajor").then((response) => {
       setHelpMajorList(response.data);
     });
@@ -52,7 +52,6 @@ const HelpMajor = () => {
 
   return (
     <div className="container">
-      <Datetime className="mb-20" />
       <h1 className="info-name">รายชื่อผู้ป่วยที่ได้เข้าช่วยการผ่าตัดใหญ่</h1>
       <div className="info-detail">อย่างน้อย 2 ราย</div>
       <div className="information">
@@ -128,14 +127,14 @@ const HelpMajor = () => {
         </form>
       </div>
       <hr />
-      <div className="datas">
-        <button class="btn btn-primary" onClick={getDatas}>
-          Show Datas
+      <div className="data">
+        <button class="btn btn-primary" onClick={getData}>
+          Show Data
         </button>
         {helpmajorList.map((val, key) => {
           return (
-            <div className="data card">
-              <div className="data-card-body text-left">
+            <div className="data-card">
+              <div className="data-card-body">
                 <p className="data-card-text">HN. : {val.hn}</p>
                 <p className="data-card-text">
                   ชื่อผู้ป่วย : {val.patient_name}
@@ -144,8 +143,7 @@ const HelpMajor = () => {
                 <p className="data-card-text">Ward : {val.ward}</p>
                 <p className="data-card-text">Unit : {val.unit}</p>
                 <button
-                  btn
-                  btn-danger
+                  className="data-card-btn btn-danger"
                   onClick={() => {
                     deleteData(val.id);
                   }}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
-import Datetime from '../../components/Datetime';
 
 
 const ObserveMajor = () => {
@@ -13,7 +12,7 @@ const ObserveMajor = () => {
 
     const [observemajorList, setObserveMajorList] = useState([]);
 
-    const getDatas = () => {
+    const getData = () => {
         Axios.get("http://localhost:3001/courses/observemajor").then((response) => {
             setObserveMajorList(response.data);
         });
@@ -55,7 +54,6 @@ const ObserveMajor = () => {
 
     return (
         <div className="container">
-            <Datetime className="mb-20" />
             <h1 className='info-name'>รายชื่อผู้ป่วยที่ได้เข้าสังเกตการผ่าตัดใหญ่</h1>
             <div className='info-detail'>อย่างน้อยสัปดาห์ละ 1 ราย/หน่วย</div>
             <div className="information">
@@ -123,20 +121,20 @@ const ObserveMajor = () => {
                 </form>
             </div>
             <hr />
-            <div className="patients">
-                <button class="btn btn-primary" onClick={getDatas}>
-                    Show Datas
+            <div className="data">
+                <button class="btn btn-primary" onClick={getData}>
+                    Show Data
                 </button>
                 {observemajorList.map((val, key) => {
                     return (
-                        <div className="data card">
+                        <div className="data-card">
                             <div className="data-card-body text-left">
                                 <p className="data-card-text">HN. : {val.hn}</p>
                                 <p className="data-card-text">ชื่อผู้ป่วย : {val.patient_name}</p>
                                 <p className="data-card-text">Diagnosis : {val.diagnosis}</p>
                                 <p className="data-card-text">Ward : {val.ward}</p>
                                 <p className="data-card-text">Unit : {val.unit}</p>
-                                <button btn btn-danger onClick={() => {deleteData(val.id)}}>Delete</button>
+                                <button className="data-card-btn btn-danger" onClick={() => {deleteData(val.id)}}>Delete</button>
                             </div>
                         </div>
                     );

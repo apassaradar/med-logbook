@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import { SidebarData } from './SidebarData';
+import { TeacherSidebarData } from './TeacherSidebarData';
+import { StudentSidebarData } from './StudentSidebarData';
 import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
 
@@ -66,6 +67,18 @@ const Logout = styled(Link)`
 
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
+
+  const [SidebarData, setSidebarData] = useState([]);
+  useEffect(() => {
+
+    const role = window.localStorage.getItem('role');
+    
+    if (role == 'student') {
+      setSidebarData(StudentSidebarData)
+    } else {
+      setSidebarData(TeacherSidebarData)
+    }
+  }, [])
 
   const showSidebar = () => setSidebar(!sidebar);
 

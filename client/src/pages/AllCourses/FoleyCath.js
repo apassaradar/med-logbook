@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import Datetime from "../../components/Datetime";
 
 const FoleyCath = () => {
   const [hn, setHn] = useState("");
@@ -11,7 +10,7 @@ const FoleyCath = () => {
 
   const [foleycathList, setFoleyCathList] = useState([]);
 
-  const getDatas = () => {
+  const getData = () => {
     Axios.get("http://localhost:3001/courses/foleycath").then((response) => {
       setFoleyCathList(response.data);
     });
@@ -52,7 +51,6 @@ const FoleyCath = () => {
 
   return (
     <div className="container">
-      <Datetime className="mb-20" />
       <h1 className="info-name">รายชื่อผู้ป่วยที่ได้ใส่ Foley Cath.</h1>
       <div className="info-detail">อย่างน้อย 2 ราย</div>
       <div className="information">
@@ -128,13 +126,13 @@ const FoleyCath = () => {
         </form>
       </div>
       <hr />
-      <div className="datas">
-        <button class="btn btn-primary" onClick={getDatas}>
-          Show Datas
+      <div className="data">
+        <button class="btn btn-primary" onClick={getData}>
+          Show Data
         </button>
         {foleycathList.map((val, key) => {
           return (
-            <div className="data card">
+            <div className="data-card">
               <div className="data-card-body text-left">
                 <p className="data-card-text">HN. : {val.hn}</p>
                 <p className="data-card-text">
@@ -143,9 +141,7 @@ const FoleyCath = () => {
                 <p className="data-card-text">Diagnosis : {val.diagnosis}</p>
                 <p className="data-card-text">Ward : {val.ward}</p>
                 <p className="data-card-text">Unit : {val.unit}</p>
-                <button
-                  btn
-                  btn-danger
+                <button className="data-card-btn btn-danger"
                   onClick={() => {
                     deleteData(val.id);
                   }}

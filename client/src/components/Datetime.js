@@ -1,27 +1,22 @@
-import React from "react";
-import styled from "styled-components";
-
-const datetime = styled.div`
-  width: 100%;
-  color: red;
-`;
+import { useState, useEffect } from "react";
 
 
-const Datetime = () => {
 
-    var showdate = new Date();
-    // var displaytodaysdate = showdate.getDate()+'/'+(showdate.getMonth()+1)+'/'+showdate.getFullYear();
-    var dt = showdate.toDateString();
-    var displaytime = showdate.getHours()+':'+showdate.getMinutes()+':'+showdate.getSeconds();
+function Clock() {
+  var showdate = new Date();
+  // var displaytodaysdate = showdate.getDate()+'/'+(showdate.getMonth()+1)+'/'+showdate.getFullYear();
+  var dt = showdate.toDateString();
+  const [date, setDate] = useState(new Date());
 
-    return (
-        <datetime>
-            <div>
-                {/* <input type="text" value={displaytodaysdate} readOnly="true" /> */}
-                {dt} - {displaytime}
-            </div>
-        </datetime>
-    );
-};
-
-export default Datetime;
+  function refreshClock() {
+    setDate(new Date());
+  }
+  useEffect(() => {
+    const timerId = setInterval(refreshClock, 1000);
+    return function cleanup() {
+      clearInterval(timerId);
+    };
+  }, []);
+  return <span className="datetime">{dt} -- {date.toLocaleTimeString()}</span>;
+}
+export default Clock;

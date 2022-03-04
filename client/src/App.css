@@ -21,16 +21,37 @@
 }
 
 .datetime {
-  background-color: rgb(212, 30, 30);
-  font-size: 4rem;
-  justify-content: right;
+  background-color: rgb(209, 209, 209);
+  font-size: 2rem;
+  justify-content: center;
 }
 
 .container {
-  width: 800px;
+  width: max-content;
   margin-top: 80px;
   justify-self: center;
-  height: 1000px;
+  height: max-content;
+  outline-style: solid;
+}
+
+.grading-container {
+  width: max-content;
+  margin-top: 80px;
+  justify-self: center;
+  
+  height: max-content;
+  outline-style: solid;
+  
+}
+.grading-row {
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+
+.grading-courses {
+  font-size: 2.8rem;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 .btn-success {
@@ -121,7 +142,7 @@
 .data-card {
   margin: 2rem 2rem 2rem 0;
   padding-top: 1.5rem;
-  width: 500px;
+  width: max-content;
   box-shadow: 0 0 15px 4px rgb(187, 182, 182);
   transition: transform 0.3s ease;
 }

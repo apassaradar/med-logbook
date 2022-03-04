@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import Datetime from "../../components/Datetime";
 
 
 const Resident = () => {
@@ -9,7 +8,7 @@ const Resident = () => {
 
     const [residentList, setResidentList] = useState([]);
 
-    const getDatas = () => {
+    const getData = () => {
         Axios.get("http://localhost:3001/courses/resident").then((response) => {
           setResidentList(response.data);
         });
@@ -42,7 +41,6 @@ const Resident = () => {
       
     return (
         <div className="container">
-            <Datetime className="mb-20" />
             <h1 className='info-name'>การสอนของ Resident</h1>
             <div className="information">
                 <form action="">
@@ -63,20 +61,18 @@ const Resident = () => {
                 </form>
             </div>
             <hr />
-            <div className="datas">
-                <button class="btn btn-primary" onClick={getDatas}>
-                    Show Datas
+            <div className="data">
+                <button class="btn btn-primary" onClick={getData}>
+                    Show Data
                 </button>
                 {residentList.map((val, key) => {
           return (
-            <div className="data card">
+            <div className="data-card">
               <div className="data-card-body text-left">
                 <p className="data-card-text">
                   เรื่องที่สอน : {val.subject}
                 </p> 
-                <button
-                  btn
-                  btn-danger
+                <button className="data-card-btn btn-danger"
                   onClick={() => {
                     deleteData(val.id);
                   }}

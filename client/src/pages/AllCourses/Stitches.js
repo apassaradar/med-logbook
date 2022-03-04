@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import Datetime from "../../components/Datetime";
+
+
 
 const Stitches = () => {
   const [hn, setHn] = useState("");
@@ -11,7 +12,7 @@ const Stitches = () => {
 
   const [stitchesList, setStitchesList] = useState([]);
 
-  const getDatas = () => {
+  const getData = () => {
     Axios.get("http://localhost:3001/courses/stitches").then((response) => {
       setStitchesList(response.data);
     });
@@ -52,7 +53,6 @@ const Stitches = () => {
 
   return (
     <div className="container">
-      <Datetime className="mb-20" />
       <h1 className="info-name">รายชื่อผู้ป่วยที่ได้เย็บแผล</h1>
       <div className="info-detail">อย่างน้อย 3 ราย</div>
       <div className="information">
@@ -126,11 +126,11 @@ const Stitches = () => {
         </form>
       </div>
       <hr />
-      <div className="datas">
-        <button class="btn btn-primary" onClick={getDatas}>Show Datas</button>
+      <div className="data">
+        <button class="btn btn-primary" onClick={getData}>Show Data</button>
         {stitchesList.map((val, key) => {
           return (
-            <div className="data card">
+            <div className="data-card">
               <div className="data-card-body text-left">
                 <p className="data-card-text">HN. : {val.hn}</p>
                 <p className="data-card-text">
@@ -139,9 +139,7 @@ const Stitches = () => {
                 <p className="data-card-text">Diagnosis : {val.diagnosis}</p>
                 <p className="data-card-text">Ward : {val.ward}</p>
                 <p className="data-card-text">Unit : {val.unit}</p>
-                <button
-                  btn
-                  btn-danger
+                <button className="data-card-btn btn-danger"
                   onClick={() => {
                     deleteData(val.id);
                   }}

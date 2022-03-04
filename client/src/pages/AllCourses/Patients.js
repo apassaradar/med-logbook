@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import Datetime from "../../components/Datetime";
+import Clock from "../../components/Datetime";
 
 
 
@@ -14,7 +14,7 @@ const Patients = () => {
 
     const [patientList, setPatientList] = useState([]);
 
-    const getDatas = () => {
+    const getData = () => {
         Axios.get("http://localhost:3001/courses/patients").then((response) => {
             setPatientList(response.data);
         });
@@ -53,9 +53,11 @@ const Patients = () => {
 
     return (
         <div className="container">
-            <Datetime className="mb-20" />
+            <Clock />
+            
             <h1 className="info-name">รายชื่อผู้ป่วยที่ได้รับไว้ในความดูแล</h1>
             <div className="info-detail">หน่วยละ 2 ราย</div>
+            <button class="btn btn-success" onClick={addData}>Add Data</button>
             <div className="information">
                 <form action="">
                     <div className="mb-3">
@@ -122,13 +124,13 @@ const Patients = () => {
                             }}
                         />
                     </div>
-                    <button class="btn btn-success" onClick={addData}>Add Patient</button>
+                    
                 </form>
             </div>
             <hr />
-            <div className="datas">
-                <button class="btn btn-primary" onClick={getDatas}>
-                    Show Patients
+            <div className="data">
+                <button class="btn btn-primary" onClick={getData}>
+                    Show Data
                 </button>
                 {patientList.map((val, key) => {
                     return (

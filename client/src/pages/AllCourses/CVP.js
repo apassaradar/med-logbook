@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import Datetime from "../../components/Datetime";
 
 const CVP = () => {
   const [hn, setHn] = useState("");
@@ -11,7 +10,7 @@ const CVP = () => {
 
   const [cvpList, setCvpList] = useState([]);
 
-  const getDatas = () => {
+  const getData = () => {
     Axios.get("http://localhost:3001/courses/cvp").then((response) => {
       setCvpList(response.data);
     });
@@ -50,7 +49,6 @@ const CVP = () => {
 
   return (
     <div className="container">
-      <Datetime className="mb-20" />
       <h1 className="info-name">รายชื่อผู้ป่วยที่ได้ทำการวัด CVP</h1>
       <div className="information">
         <form action="">
@@ -126,13 +124,13 @@ const CVP = () => {
         </form>
       </div>
       <hr />
-      <div className="datas">
-        <button class="btn btn-primary" onClick={getDatas}>
-          Show Datas
+      <div className="data">
+        <button class="btn btn-primary" onClick={getData}>
+          Show Data
         </button>
         {cvpList.map((val, key) => {
           return (
-            <div className="data card">
+            <div className="data-card">
               <div className="data-card-body text-left">
                 <p className="data-card-text">HN. : {val.hn}</p>
                 <p className="data-card-text">
@@ -141,9 +139,7 @@ const CVP = () => {
                 <p className="data-card-text">Diagnosis : {val.diagnosis}</p>
                 <p className="data-card-text">Ward : {val.ward}</p>
                 <p className="data-card-text">Unit : {val.unit}</p>
-                <button
-                  btn
-                  btn-danger
+                <button className="data-card-btn btn-danger"
                   onClick={() => {
                     deleteData(val.id);
                   }}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import Datetime from "../../components/Datetime";
 
 
 
@@ -10,7 +9,7 @@ const OPD = () => {
 
     const [opdList, setOpdList] = useState([]);
 
-    const getDatas = () => {
+    const getData = () => {
         Axios.get("http://localhost:3001/courses/opd").then((response) => {
             setOpdList(response.data);
         });
@@ -41,7 +40,6 @@ const OPD = () => {
 
     return (
         <div className="container">
-            <Datetime className="mb-20" />
             <h1 className="info-name">การเข้าเรียนที่ OPD</h1>
             
             <div className="information">
@@ -64,16 +62,16 @@ const OPD = () => {
                 </form>
             </div>
             <hr />
-            <div className="datas">
-                <button class="btn btn-primary" onClick={getDatas}>
-                    Show Datas
+            <div className="data">
+                <button class="btn btn-primary" onClick={getData}>
+                    Show Data
                 </button>
                 {opdList.map((val, key) => {
                     return (
-                        <div className="data card">
+                        <div className="data-card">
                             <div className="data-card-body text-left">
                                 <p className="data-card-text">OPD Unit : {val.opd}</p>
-                                <button btn btn-danger onClick={() => {deleteData(val.id)}}>Delete</button>
+                                <button className="data-card-btn btn-danger" onClick={() => {deleteData(val.id)}}>Delete</button>
                             </div>
                         </div>
                     );
